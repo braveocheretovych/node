@@ -35,6 +35,7 @@ import (
 	ethermint "github.com/zeta-chain/ethermint/types"
 	evmtypes "github.com/zeta-chain/ethermint/x/evm/types"
 
+	"github.com/ethereum/go-ethereum/common/math"
 	rpctypes "github.com/zeta-chain/node/rpc/types"
 	"github.com/zeta-chain/node/server/config"
 )
@@ -131,7 +132,7 @@ type EVMBackend interface {
 	PendingTransactions() ([]*sdk.Tx, error)
 	GetCoinbase() (sdk.AccAddress, error)
 	FeeHistory(
-		blockCount rpc.DecimalOrHex,
+		blockCount math.HexOrDecimal64,
 		lastBlock rpc.BlockNumber,
 		rewardPercentiles []float64,
 	) (*rpctypes.FeeHistoryResult, error)

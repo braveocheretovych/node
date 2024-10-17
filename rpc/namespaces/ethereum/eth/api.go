@@ -26,6 +26,7 @@ import (
 	ethermint "github.com/zeta-chain/ethermint/types"
 	evmtypes "github.com/zeta-chain/ethermint/x/evm/types"
 
+	ethmath "github.com/ethereum/go-ethereum/common/math"
 	"github.com/zeta-chain/node/rpc/backend"
 	rpctypes "github.com/zeta-chain/node/rpc/types"
 )
@@ -98,7 +99,7 @@ type EthereumAPI interface {
 	GasPrice() (*hexutil.Big, error)
 	EstimateGas(args evmtypes.TransactionArgs, blockNrOptional *rpctypes.BlockNumber) (hexutil.Uint64, error)
 	FeeHistory(
-		blockCount rpc.DecimalOrHex,
+		blockCount ethmath.HexOrDecimal64,
 		lastBlock rpc.BlockNumber,
 		rewardPercentiles []float64,
 	) (*rpctypes.FeeHistoryResult, error)
@@ -350,7 +351,7 @@ func (e *PublicAPI) EstimateGas(
 	return e.backend.EstimateGas(args, blockNrOptional)
 }
 
-func (e *PublicAPI) FeeHistory(blockCount rpc.DecimalOrHex,
+func (e *PublicAPI) FeeHistory(blockCount ethmath.HexOrDecimal64,
 	lastBlock rpc.BlockNumber,
 	rewardPercentiles []float64,
 ) (*rpctypes.FeeHistoryResult, error) {

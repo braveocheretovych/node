@@ -136,7 +136,7 @@ func (t *Trie) GenerateProof(txIndex int) (*Proof, error) {
 	// #nosec G115 checked as non-negative
 	indexBuf = rlp.AppendUint64(indexBuf[:0], uint64(txIndex))
 	proof := NewProof()
-	err := t.Prove(indexBuf, 0, proof)
+	err := t.Prove(indexBuf, proof)
 	if err != nil {
 		return nil, err
 	}
