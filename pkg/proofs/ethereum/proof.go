@@ -146,8 +146,7 @@ func (t *Trie) GenerateProof(txIndex int) (*Proof, error) {
 // NewTrie builds a trie from a DerivableList. The DerivableList must be types.Transactions
 // or types.Receipts.
 func NewTrie(list types.DerivableList) Trie {
-	hasher := new(trie.Trie)
-	hasher.Reset()
+	hasher := trie.NewEmpty(nil)
 
 	valueBuf := encodeBufferPool.Get().(*bytes.Buffer)
 	defer encodeBufferPool.Put(valueBuf)
