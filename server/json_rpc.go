@@ -16,9 +16,13 @@
 package server
 
 import (
+	"context"
 	"net/http"
 	"time"
 
+	"golang.org/x/exp/slog"
+
+	tmlog "github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/server"
 	"github.com/cosmos/cosmos-sdk/server/types"
@@ -32,6 +36,45 @@ import (
 	"github.com/zeta-chain/node/server/config"
 )
 
+type gethLogsToTm struct {
+	logger tmlog.Logger
+	attrs  []slog.Attr
+}
+
+func (g *gethLogsToTm) Enabled(_ context.Context, _ slog.Level) bool {
+	return true
+}
+
+func (g *gethLogsToTm) Handle(ctx context.Context, record slog.Record) error {
+	attrs := g.attrs
+	record.Attrs(func(attr slog.Attr) bool {
+		attrs = append(attrs, attr)
+		return true
+	})
+	switch record.Level {
+	case slog.LevelDebug:
+		g.logger.Debug(record.Message, attrs)
+	case slog.LevelInfo:
+		g.logger.Info(record.Message, attrs)
+	case slog.LevelWarn:
+		g.logger.Info(record.Message, attrs)
+	case slog.LevelError:
+		g.logger.Error(record.Message, attrs)
+	}
+	return nil
+}
+
+func (g *gethLogsToTm) WithAttrs(attrs []slog.Attr) slog.Handler {
+	return &gethLogsToTm{
+		logger: g.logger,
+		attrs:  append(g.attrs, attrs...),
+	}
+}
+
+func (g *gethLogsToTm) WithGroup(name string) slog.Handler {
+	return g
+}
+
 // StartJSONRPC starts the JSON-RPC server
 func StartJSONRPC(ctx *server.Context,
 	clientCtx client.Context,
@@ -43,17 +86,7 @@ func StartJSONRPC(ctx *server.Context,
 	tmWsClient := ConnectTmWS(tmRPCAddr, tmEndpoint, ctx.Logger)
 
 	logger := ctx.Logger.With("module", "geth")
-	ethlog.Root().SetHandler(ethlog.FuncHandler(func(r *ethlog.Record) error {
-		switch r.Lvl {
-		case ethlog.LvlTrace, ethlog.LvlDebug:
-			logger.Debug(r.Msg, r.Ctx...)
-		case ethlog.LvlInfo, ethlog.LvlWarn:
-			logger.Info(r.Msg, r.Ctx...)
-		case ethlog.LvlError, ethlog.LvlCrit:
-			logger.Error(r.Msg, r.Ctx...)
-		}
-		return nil
-	}))
+	ethlog.SetDefault(ethlog.NewLogger(&gethLogsToTm{logger: logger}))
 
 	rpcServer := ethrpc.NewServer()
 

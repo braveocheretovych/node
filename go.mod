@@ -24,7 +24,7 @@ require (
 	github.com/cosmos/ibc-go/v7 v7.4.0
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
 	github.com/emicklei/proto v1.11.1
-	github.com/ethereum/go-ethereum v1.12.2
+	github.com/ethereum/go-ethereum v1.13.15
 	github.com/fatih/color v1.14.1
 	github.com/frumioj/crypto11 v1.2.5-0.20210823151709-946ce662cc0e
 	github.com/gagliardetto/solana-go v1.10.0
@@ -57,7 +57,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.18.2
 	github.com/stretchr/testify v1.9.0
-	github.com/zeta-chain/ethermint v0.0.0-20241017184205-3d31dded1176
+	github.com/zeta-chain/ethermint v0.0.0-20241018224450-a8bc9b954b40
 	github.com/zeta-chain/keystone/keys v0.0.0-20240826165841-3874f358c138
 	github.com/zeta-chain/protocol-contracts v1.0.2-athens3.0.20241021075719-d40d2e28467c
 	gitlab.com/thorchain/tss/go-tss v1.6.5
@@ -153,7 +153,6 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
-	github.com/go-stack/stack v1.8.1 // indirect
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gogo/googleapis v1.4.1 // indirect
@@ -322,7 +321,6 @@ require (
 	google.golang.org/genproto v0.0.0-20240123012728-ef4313101c80 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce // indirect
 	lukechampine.com/blake3 v1.2.1 // indirect
 	nhooyr.io/websocket v1.8.7 // indirect
 	pgregory.net/rapid v1.1.0 // indirect
@@ -333,6 +331,7 @@ require (
 	github.com/bnb-chain/tss-lib v1.5.0
 	github.com/showa-93/go-mask v0.6.2
 	github.com/tonkeeper/tongo v1.9.3
+	github.com/zeta-chain/go-ethereum v1.13.16-0.20241017183300-40bd3394b00f
 )
 
 require (
@@ -357,7 +356,6 @@ require (
 	github.com/snksoft/crc v1.1.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/supranational/blst v0.3.11 // indirect
-	github.com/zeta-chain/go-ethereum v1.13.16-0.20241017183300-40bd3394b00f // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.46.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.46.1 // indirect
 	rsc.io/tmplfunc v0.0.3 // indirect
@@ -379,7 +377,7 @@ replace (
 	// https://github.com/zeta-chain/tss-lib/tree/threshold-dep-updates
 	// which is a fork of https://github.com/threshold-network/tss-lib
 	github.com/bnb-chain/tss-lib => github.com/zeta-chain/tss-lib v0.0.0-20240916163010-2e6b438bd901
-	github.com/ethereum/go-ethereum => github.com/zeta-chain/go-ethereum v1.12.3-0.20241015175757-891ef9f51367
+	github.com/ethereum/go-ethereum => github.com/zeta-chain/go-ethereum v1.13.16-0.20241018211122-a3509360e99b
 	github.com/libp2p/go-libp2p => github.com/zeta-chain/go-libp2p v0.0.0-20240710192637-567fbaacc2b4
 	gitlab.com/thorchain/tss/go-tss => github.com/zeta-chain/go-tss v0.0.0-20240916173049-89fee4b0ae7f
 )
