@@ -20,8 +20,6 @@ import (
 	"net/http"
 	"time"
 
-	"golang.org/x/exp/slog"
-
 	tmlog "github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/server"
@@ -31,6 +29,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	ethermint "github.com/zeta-chain/ethermint/types"
+	"golang.org/x/exp/slog"
 
 	"github.com/zeta-chain/node/rpc"
 	"github.com/zeta-chain/node/server/config"
@@ -45,7 +44,7 @@ func (g *gethLogsToTm) Enabled(_ context.Context, _ slog.Level) bool {
 	return true
 }
 
-func (g *gethLogsToTm) Handle(ctx context.Context, record slog.Record) error {
+func (g *gethLogsToTm) Handle(_ context.Context, record slog.Record) error {
 	attrs := g.attrs
 	record.Attrs(func(attr slog.Attr) bool {
 		attrs = append(attrs, attr)
@@ -71,7 +70,7 @@ func (g *gethLogsToTm) WithAttrs(attrs []slog.Attr) slog.Handler {
 	}
 }
 
-func (g *gethLogsToTm) WithGroup(name string) slog.Handler {
+func (g *gethLogsToTm) WithGroup(_ string) slog.Handler {
 	return g
 }
 

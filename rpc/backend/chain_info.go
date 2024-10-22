@@ -25,6 +25,7 @@ import (
 	tmrpctypes "github.com/cometbft/cometbft/rpc/core/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	ethmath "github.com/ethereum/go-ethereum/common/math"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
@@ -33,7 +34,6 @@ import (
 	evmtypes "github.com/zeta-chain/ethermint/x/evm/types"
 	feemarkettypes "github.com/zeta-chain/ethermint/x/feemarket/types"
 
-	ethmath "github.com/ethereum/go-ethereum/common/math"
 	rpctypes "github.com/zeta-chain/node/rpc/types"
 )
 

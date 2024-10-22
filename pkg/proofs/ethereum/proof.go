@@ -159,18 +159,18 @@ func NewTrie(list types.DerivableList) Trie {
 		// #nosec G115 iterator
 		indexBuf = rlp.AppendUint64(indexBuf[:0], uint64(i))
 		value := encodeForDerive(list, i, valueBuf)
-		hasher.Update(indexBuf, value)
+		_ = hasher.Update(indexBuf, value)
 	}
 	if list.Len() > 0 {
 		indexBuf = rlp.AppendUint64(indexBuf[:0], 0)
 		value := encodeForDerive(list, 0, valueBuf)
-		hasher.Update(indexBuf, value)
+		_ = hasher.Update(indexBuf, value)
 	}
 	for i := 0x80; i < list.Len(); i++ {
 		// #nosec G115 iterator
 		indexBuf = rlp.AppendUint64(indexBuf[:0], uint64(i))
 		value := encodeForDerive(list, i, valueBuf)
-		hasher.Update(indexBuf, value)
+		_ = hasher.Update(indexBuf, value)
 	}
 	return Trie{hasher}
 }
